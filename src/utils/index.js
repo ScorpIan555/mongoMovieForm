@@ -1,10 +1,10 @@
-import TurboClient from './TurboClient'
+import HTTPAsyncClient from './HTTPAsyncClient'
 import ServerEntry from './ServerEntry'
 import renderComponents from './renderComponents'
 
 export {
 
-	TurboClient,
+	HTTPAsyncClient,
 	ServerEntry,
 	renderComponents
 

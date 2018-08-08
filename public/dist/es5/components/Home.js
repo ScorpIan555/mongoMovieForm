@@ -15,19 +15,52 @@ var _react = require("react");
 var React = _interopRequire(_react);
 
 var Component = _react.Component;
-// import Nav from './presentation'
+var connect = require("react-redux").connect;
+var actions = _interopRequire(require("../actions"));
 
 var Home = (function (Component) {
     function Home() {
         _classCallCheck(this, Home);
 
         _get(Object.getPrototypeOf(Home.prototype), "constructor", this).call(this);
-        this.state = {};
+        this.state = {
+            movie: {
+                title: "",
+                year: "",
+                imdb: ""
+            }
+        };
+        this.handleFormChange = this.handleFormChange.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
     _inherits(Home, Component);
 
     _prototypeProperties(Home, null, {
+        handleClick: {
+            value: function handleClick(event) {
+                event.preventDefault();
+                console.log("click handled!", this.state.movie);
+
+                this.props.addMovie(this.state.movie);
+            },
+            writable: true,
+            configurable: true
+        },
+        handleFormChange: {
+            value: function handleFormChange(attr, event) {
+                console.log(attr + " == " + event.target.value);
+
+                var updated = Object.assign({}, this.state.movie);
+                updated[attr] = event.target.value;
+
+                this.setState({
+                    movie: updated
+                });
+            },
+            writable: true,
+            configurable: true
+        },
         render: {
             value: function render() {
                 return React.createElement(
@@ -66,12 +99,12 @@ var Home = (function (Component) {
                                                     React.createElement(
                                                         "h2",
                                                         { className: "mb-2" },
-                                                        "Reset password"
+                                                        "Enter A Movie!"
                                                     ),
                                                     React.createElement(
                                                         "span",
                                                         null,
-                                                        "Enter email address to reset password"
+                                                        "fill out the form to contribute a film "
                                                     )
                                                 ),
                                                 React.createElement(
@@ -85,18 +118,59 @@ var Home = (function (Component) {
                                                             { className: "form-group" },
                                                             React.createElement(
                                                                 "label",
-                                                                { "for": "reset-email" },
-                                                                "Email Address"
+                                                                { "for": "movieTitle" },
+                                                                "Title"
                                                             ),
-                                                            React.createElement("input", { className: "form-control form-control-lg", type: "email", name: "email", id: "reset-email", placeholder: "Email Address" })
+                                                            React.createElement("input", {
+                                                                onChange: this.handleFormChange.bind(this, "title"),
+                                                                className: "form-control form-control-lg",
+                                                                type: "text",
+                                                                name: "title",
+                                                                id: "movieTitle",
+                                                                placeholder: "What Movie?" })
+                                                        ),
+                                                        React.createElement(
+                                                            "div",
+                                                            { className: "form-group" },
+                                                            React.createElement(
+                                                                "label",
+                                                                { "for": "movieYear" },
+                                                                "Year"
+                                                            ),
+                                                            React.createElement("input", {
+                                                                onChange: this.handleFormChange.bind(this, "year"),
+                                                                className: "form-control form-control-lg",
+                                                                type: "text",
+                                                                name: "year",
+                                                                id: "movieYear",
+                                                                placeholder: "What Year?" })
+                                                        ),
+                                                        React.createElement(
+                                                            "div",
+                                                            { className: "form-group" },
+                                                            React.createElement(
+                                                                "label",
+                                                                { "for": "imdbNumber" },
+                                                                "IMDB"
+                                                            ),
+                                                            React.createElement("input", {
+                                                                onChange: this.handleFormChange.bind(this, "name"),
+                                                                className: "form-control form-control-lg",
+                                                                type: "text",
+                                                                name: "imdb",
+                                                                id: "imdbNumber",
+                                                                placeholder: "What IMDb?" })
                                                         ),
                                                         React.createElement(
                                                             "div",
                                                             { className: "text-center mb-4" },
                                                             React.createElement(
                                                                 "button",
-                                                                { type: "submit", className: "btn btn-primary btn-lg" },
-                                                                "Reset password"
+                                                                {
+                                                                    onClick: this.handleClick,
+                                                                    type: "submit",
+                                                                    className: "btn btn-primary btn-lg" },
+                                                                "Submit!"
                                                             )
                                                         )
                                                     )
@@ -118,4 +192,21 @@ var Home = (function (Component) {
     return Home;
 })(Component);
 
-module.exports = Home;
+
+
+
+
+
+var stateToProps = function (state) {
+    return {};
+};
+
+var dispatchToProps = function (dispatch) {
+    return {
+        addMovie: function (movie) {
+            return dispatch(actions.addMovie(movie));
+        }
+    };
+};
+
+module.exports = connect(stateToProps, dispatchToProps)(Home);

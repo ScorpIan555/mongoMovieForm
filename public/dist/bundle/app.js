@@ -152,9 +152,22 @@
 /******/ 	return checkDeferredModules();
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ 14:
+/******/ ([
+/* 0 */,
+/* 1 */,
+/* 2 */,
+/* 3 */,
+/* 4 */,
+/* 5 */,
+/* 6 */,
+/* 7 */,
+/* 8 */,
+/* 9 */,
+/* 10 */,
+/* 11 */,
+/* 12 */,
+/* 13 */,
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -197,8 +210,16 @@ var app = _react2.default.createElement(
 _reactDom2.default.render(app, document.getElementById('root'));
 
 /***/ }),
-
-/***/ 24:
+/* 15 */,
+/* 16 */,
+/* 17 */,
+/* 18 */,
+/* 19 */,
+/* 20 */,
+/* 21 */,
+/* 22 */,
+/* 23 */,
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -252,8 +273,9 @@ exports.default = {
 };
 
 /***/ }),
-
-/***/ 27:
+/* 25 */,
+/* 26 */,
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -276,8 +298,7 @@ exports.userReducer = _userReducer2.default; /* * * * * * * * * * * * * * * * * 
                                              */
 
 /***/ }),
-
-/***/ 28:
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -333,8 +354,7 @@ exports.default = function () {
 };
 
 /***/ }),
-
-/***/ 29:
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -352,6 +372,7 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = {
 
+	MOVIE_CREATED: 'MOVIE_CREATED',
 	USERS_RECEIVED: 'USERS_RECEIVED',
 	USER_CREATED: 'USER_CREATED',
 	USER_LOGGED_IN: 'USER_LOGGED_IN',
@@ -360,8 +381,9 @@ exports.default = {
 };
 
 /***/ }),
-
-/***/ 32:
+/* 30 */,
+/* 31 */,
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -377,6 +399,12 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRedux = __webpack_require__(33);
+
+var _actions = __webpack_require__(34);
+
+var _actions2 = _interopRequireDefault(_actions);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -384,8 +412,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-// import Nav from './presentation'
 
 var Home = function (_Component) {
     _inherits(Home, _Component);
@@ -395,80 +421,149 @@ var Home = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this));
 
-        _this.state = {};
+        _this.state = {
+            movie: {
+                title: '',
+                year: '',
+                imdb: ''
+            }
+        };
+        _this.handleFormChange = _this.handleFormChange.bind(_this);
+        _this.handleClick = _this.handleClick.bind(_this);
         return _this;
     }
 
     _createClass(Home, [{
-        key: "render",
+        key: 'handleClick',
+        value: function handleClick(event) {
+            event.preventDefault();
+            console.log('click handled!', this.state.movie);
+
+            this.props.addMovie(this.state.movie);
+        }
+    }, {
+        key: 'handleFormChange',
+        value: function handleFormChange(attr, event) {
+            console.log(attr + ' == ' + event.target.value);
+
+            var updated = Object.assign({}, this.state.movie);
+            updated[attr] = event.target.value;
+
+            this.setState({
+                movie: updated
+            });
+        }
+    }, {
+        key: 'render',
         value: function render() {
             return _react2.default.createElement(
-                "div",
+                'div',
                 null,
-                _react2.default.createElement("div", { className: "nav-container" }),
+                _react2.default.createElement('div', { className: 'nav-container' }),
                 _react2.default.createElement(
-                    "div",
-                    { className: "main-container" },
+                    'div',
+                    { className: 'main-container' },
                     _react2.default.createElement(
-                        "section",
-                        { className: "space-sm" },
+                        'section',
+                        { className: 'space-sm' },
                         _react2.default.createElement(
-                            "div",
-                            { className: "container align-self-start" },
+                            'div',
+                            { className: 'container align-self-start' },
                             _react2.default.createElement(
-                                "div",
-                                { className: "row mb-5" },
-                                _react2.default.createElement("div", { className: "col text-center" })
+                                'div',
+                                { className: 'row mb-5' },
+                                _react2.default.createElement('div', { className: 'col text-center' })
                             ),
                             _react2.default.createElement(
-                                "div",
-                                { className: "row justify-content-center" },
+                                'div',
+                                { className: 'row justify-content-center' },
                                 _react2.default.createElement(
-                                    "div",
-                                    { className: "col-12 col-md-8 col-lg-7" },
+                                    'div',
+                                    { className: 'col-12 col-md-8 col-lg-7' },
                                     _react2.default.createElement(
-                                        "div",
-                                        { className: "card card-lg text-center" },
+                                        'div',
+                                        { className: 'card card-lg text-center' },
                                         _react2.default.createElement(
-                                            "div",
-                                            { className: "card-body" },
+                                            'div',
+                                            { className: 'card-body' },
                                             _react2.default.createElement(
-                                                "div",
-                                                { className: "mb-4" },
+                                                'div',
+                                                { className: 'mb-4' },
                                                 _react2.default.createElement(
-                                                    "h2",
-                                                    { className: "mb-2" },
-                                                    "Reset password"
+                                                    'h2',
+                                                    { className: 'mb-2' },
+                                                    'Enter A Movie!'
                                                 ),
                                                 _react2.default.createElement(
-                                                    "span",
+                                                    'span',
                                                     null,
-                                                    "Enter email address to reset password"
+                                                    'fill out the form to contribute a film '
                                                 )
                                             ),
                                             _react2.default.createElement(
-                                                "div",
-                                                { className: "row no-gutters justify-content-center" },
+                                                'div',
+                                                { className: 'row no-gutters justify-content-center' },
                                                 _react2.default.createElement(
-                                                    "form",
-                                                    { className: "text-left col-lg-8" },
+                                                    'form',
+                                                    { className: 'text-left col-lg-8' },
                                                     _react2.default.createElement(
-                                                        "div",
-                                                        { className: "form-group" },
+                                                        'div',
+                                                        { className: 'form-group' },
                                                         _react2.default.createElement(
-                                                            "label",
-                                                            { "for": "reset-email" },
-                                                            "Email Address"
+                                                            'label',
+                                                            { 'for': 'movieTitle' },
+                                                            'Title'
                                                         ),
-                                                        _react2.default.createElement("input", { className: "form-control form-control-lg", type: "email", name: "email", id: "reset-email", placeholder: "Email Address" })
+                                                        _react2.default.createElement('input', {
+                                                            onChange: this.handleFormChange.bind(this, 'title'),
+                                                            className: 'form-control form-control-lg',
+                                                            type: 'text',
+                                                            name: 'title',
+                                                            id: 'movieTitle',
+                                                            placeholder: 'What Movie?' })
                                                     ),
                                                     _react2.default.createElement(
-                                                        "div",
-                                                        { className: "text-center mb-4" },
+                                                        'div',
+                                                        { className: 'form-group' },
                                                         _react2.default.createElement(
-                                                            "button",
-                                                            { type: "submit", className: "btn btn-primary btn-lg" },
-                                                            "Reset password"
+                                                            'label',
+                                                            { 'for': 'movieYear' },
+                                                            'Year'
+                                                        ),
+                                                        _react2.default.createElement('input', {
+                                                            onChange: this.handleFormChange.bind(this, 'year'),
+                                                            className: 'form-control form-control-lg',
+                                                            type: 'text',
+                                                            name: 'year',
+                                                            id: 'movieYear',
+                                                            placeholder: 'What Year?' })
+                                                    ),
+                                                    _react2.default.createElement(
+                                                        'div',
+                                                        { className: 'form-group' },
+                                                        _react2.default.createElement(
+                                                            'label',
+                                                            { 'for': 'imdbNumber' },
+                                                            'IMDB'
+                                                        ),
+                                                        _react2.default.createElement('input', {
+                                                            onChange: this.handleFormChange.bind(this, 'name'),
+                                                            className: 'form-control form-control-lg',
+                                                            type: 'text',
+                                                            name: 'imdb',
+                                                            id: 'imdbNumber',
+                                                            placeholder: 'What IMDb?' })
+                                                    ),
+                                                    _react2.default.createElement(
+                                                        'div',
+                                                        { className: 'text-center mb-4' },
+                                                        _react2.default.createElement(
+                                                            'button',
+                                                            {
+                                                                onClick: this.handleClick,
+                                                                type: 'submit',
+                                                                className: 'btn btn-primary btn-lg' },
+                                                            'Submit!'
                                                         )
                                                     )
                                                 )
@@ -487,9 +582,241 @@ var Home = function (_Component) {
     return Home;
 }(_react.Component);
 
-exports.default = Home;
+var stateToProps = function stateToProps(state) {
+    return {};
+};
+
+var dispatchToProps = function dispatchToProps(dispatch) {
+    return {
+        addMovie: function addMovie(movie) {
+            return dispatch(_actions2.default.addMovie(movie));
+        }
+    };
+};
+
+exports.default = (0, _reactRedux.connect)(stateToProps, dispatchToProps)(Home);
+
+/***/ }),
+/* 33 */,
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _constants = __webpack_require__(29);
+
+var _constants2 = _interopRequireDefault(_constants);
+
+var _utils = __webpack_require__(36);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * *
+*/
+
+exports.default = {
+
+	addMovie: function addMovie(movie) {
+		return function (dispatch) {
+			return dispatch(_utils.HTTPAsyncClient.postRequest('/create', movie, _constants2.default.MOVIE_CREATED));
+		};
+	}
+
+	// fetchUsers: (params) => {
+	// 	return dispatch => {
+	// 		return dispatch(TurboClient.getRequest('user', params, constants.USERS_RECEIVED))
+	// 	}
+	// },
+	//
+	// addUser: (params) => {
+	// 	return dispatch => {
+	// 		return dispatch(TurboClient.postRequest('user', params, constants.USER_CREATED))
+	// 	}
+	// },
+	//
+	// // Unlike addUser, register() also maintains a session for login state. After calling
+	// // TurboClient.createUser(), the new user is logged in as well:
+	// register: (params) => {
+	// 	return dispatch => {
+	// 		return dispatch(TurboClient.createUser(params, constants.USER_CREATED))
+	// 	}
+	// },
+	//
+	// loginUser: (credentials) => {
+	// 	return dispatch => {
+	// 		return dispatch(TurboClient.login(credentials, constants.CURRENT_USER_RECEIVED))
+	// 	}
+	// },
+	//
+	// currentUser: () => {
+	// 	return dispatch => {
+	// 		return dispatch(TurboClient.currentUser(constants.CURRENT_USER_RECEIVED))
+	// 	}
+	// }
+
+};
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(33);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (props) {
+
+	return _react2.default.createElement(
+		_reactRedux.Provider,
+		{ store: props.store },
+		props.component
+	);
+};
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.renderComponents = exports.ServerEntry = exports.HTTPAsyncClient = undefined;
+
+var _HTTPAsyncClient = __webpack_require__(37);
+
+var _HTTPAsyncClient2 = _interopRequireDefault(_HTTPAsyncClient);
+
+var _ServerEntry = __webpack_require__(35);
+
+var _ServerEntry2 = _interopRequireDefault(_ServerEntry);
+
+var _renderComponents = __webpack_require__(38);
+
+var _renderComponents2 = _interopRequireDefault(_renderComponents);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.HTTPAsyncClient = _HTTPAsyncClient2.default;
+exports.ServerEntry = _ServerEntry2.default;
+exports.renderComponents = _renderComponents2.default;
+
+/***/ }),
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _superagent = __webpack_require__(45);
+
+var _superagent2 = _interopRequireDefault(_superagent);
+
+var _constants = __webpack_require__(29);
+
+var _constants2 = _interopRequireDefault(_constants);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var getRequest = function getRequest(endpoint, params, actionType) {
+
+  return function (dispatch) {
+    return _superagent2.default.get(endpoint).query(params).set('Accept', 'application/json').then(function (data) {
+      if (actionType != null) {
+        dispatch({
+          type: actionType,
+          params: params,
+          data: data
+        });
+      }
+    }).catch(function (err) {
+      console.log('ERR: ', err);
+      return;
+    });
+  };
+};
+
+var postRequest = function postRequest(endpoint, body, actionType) {
+  return function (dispatch) {
+    return _superagent2.default.post(endpoint).send(body).set('Accept', 'application/json').then(function (data) {
+      console.log('Async Get:', data);
+      if (actionType != null) {
+        dispatch({
+          type: actionType,
+          data: data.body.user
+        });
+      }
+    }).catch(function (err) {
+      console.log('ERR: ', err);
+      return err;
+    });
+  };
+};
+
+exports.default = {
+  getRequest: getRequest,
+  postRequest: postRequest
+};
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _server = __webpack_require__(39);
+
+var _server2 = _interopRequireDefault(_server);
+
+var _ServerEntry = __webpack_require__(35);
+
+var _ServerEntry2 = _interopRequireDefault(_ServerEntry);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (initialState, component) {
+	var app = _react2.default.createElement(component);
+	var provider = _react2.default.createElement(_ServerEntry2.default, { component: app, store: initialState });
+
+	return {
+		react: _server2.default.renderToString(provider),
+		initial: JSON.stringify(initialState.getState())
+	};
+};
 
 /***/ })
-
-/******/ });
+/******/ ]);
 //# sourceMappingURL=app.map

@@ -2,13 +2,13 @@
 
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
-var TurboClient = _interopRequire(require("./TurboClient"));
+var HTTPAsyncClient = _interopRequire(require("./HTTPAsyncClient"));
 
 var ServerEntry = _interopRequire(require("./ServerEntry"));
 
 var renderComponents = _interopRequire(require("./renderComponents"));
 
-exports.TurboClient = TurboClient;
+exports.HTTPAsyncClient = HTTPAsyncClient;
 exports.ServerEntry = ServerEntry;
 exports.renderComponents = renderComponents;
 Object.defineProperty(exports, "__esModule", {

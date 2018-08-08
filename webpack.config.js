@@ -16,7 +16,7 @@ module.exports = {
 	node: {
 		fs: 'empty'
 	},
-	devtool: '#source-map',	
+	devtool: '#source-map',
 	performance: process.env.NODE_ENV === 'production' ? {hints: false} : {},
 	plugins: process.env.NODE_ENV === 'production' ? [
 	    new webpack.DefinePlugin({
@@ -73,10 +73,10 @@ module.exports = {
 					presets:['react', 'env']
 				}
 			},
-			{
-				test: /\.json$/,
-				loader: 'json-loader'
-			},
+			// {
+			// 	test: /\.json$/,
+			// 	loader: 'json-loader'
+			// },
 			{
 				test: /\.(jpg|png|svg)$/,
 				loader: 'file-loader',
@@ -90,4 +90,3 @@ module.exports = {
 		]
 	}
 }
-
